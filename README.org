@@ -20,3 +20,8 @@ git clone https://codeberg.org/anhsirk0/pop-mix.git
 chmod +x main.py
 ./main.py
 #+END_SRC
+=Ctrl+q= to quit
+* Screnshots
+#+CAPTION: Screenshot
+#+NAME: main.png
+[[https://codeberg.org/anhsirk0/pop-mix/raw/branch/main/screenshot.png]]
