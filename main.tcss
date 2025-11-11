@@ -1,0 +1,35 @@
+Screen {
+    align: center middle;
+}
+
+Horizontal {
+    padding: 1;
+}
+
+Horizontal#playlist, Horizontal#search_container {
+    height: auto;
+}
+
+SelectionList {
+    padding: 1;
+    border: solid $accent;
+    width: 1fr;
+    height: 100%;
+}
+
+VerticalScroll#selected {
+    border: solid $accent;   
+    padding: 1;
+}
+    
+Input#search {
+    width: 60%;
+}
+
+Input#playlist_name {
+    width: 80%;
+}
+
+Button {
+    width: 20%;
+}
