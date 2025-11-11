@@ -1,0 +1,22 @@
+#+title:                 Pop-Mix
+#+author:                Krishna (Anshirk0)
+#+email:                 krishna404@yandex.com
+#+language:              en
+
++ Git repo on Codeberg: <https://codeberg.org/anhsirk0/pop-mix>
+  - Mirrors:
+    + GitHub: <https://github.com/anhsirk0/pop-mix>
+
+* About
+TUI Playlist creator for Lollypop
+* Installation
+#+BEGIN_SRC console
+git clone https://codeberg.org/anhsirk0/pop-mix.git
+#+END_SRC
+** Requirements
+ - python-textual (use your package manager to install or =pip install textual=)
+* Usage
+#+BEGIN_SRC console
+chmod +x main.py
+./main.py
+#+END_SRC
