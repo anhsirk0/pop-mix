@@ -37,6 +37,11 @@ class LollypopPlaylist:
         """)
         rows = self.cursor.fetchall()
         return [Playlist(row[0], row[1]) for row in rows]
+    
+    def get_tracks_uri(self, playlist_id: int) -> List[str]:
+        self.cursor.execute(f"select uri from tracks where playlist_id like '{playlist_id}'")
+        rows = self.cursor.fetchall()
+        return [row[0] for row in rows]
 
     def insert_uris_into_playlist(self, playlist_id: int, tracks_uri: List[str]):
         insert_query = "insert into tracks (playlist_id, uri) values (?, ?)"
@@ -45,15 +50,19 @@ class LollypopPlaylist:
         self.connection.commit()
 
     def create(self, name: str, tracks_uri: List[str]):
+        playlist_id = None
         all_playlists = self.get_all()
-        exists = len([plist for plist in all_playlists if plist.name == name]) > 0
-        if exists:
-            print(f"Playlist already exists")
-            name = f"{name}_{int(time.time())}"
-        self.cursor.execute(
-            f"insert into playlists (name, mtime) values ('{name}', current_timestamp)"
-        )
-        playlist_id = self.cursor.lastrowid
+        exists = [plist for plist in all_playlists if plist.name == name]
+        if len(exists) > 0:
+            print("Playlist already exists")
+            playlist_id = exists[0].id
+            existing_tracks = self.get_tracks_uri(playlist_id)
+            tracks_uri = [uri for uri in tracks_uri if uri not in existing_tracks]
+        else:
+            self.cursor.execute(
+                f"insert into playlists (name, mtime) values ('{name}', current_timestamp)"
+            )
+            playlist_id = self.cursor.lastrowid
         if playlist_id:
             self.insert_uris_into_playlist(playlist_id, tracks_uri)
 
